@@ -1,0 +1,61 @@
+                DropDwon
+   Selenium'daki Select Class , HTML SELECT etiketini uygulamak için kullanılan bir yöntemdir.
+   HTML seçim etiketi, öğeleri seçmek ve seçimlerini kaldırmak için yardımcı yöntemler sağlar.
+   Select sınıfı sıradan bir sınıftır, bu nedenle nesnesini oluşturmak için new anahtar sözcüğü kullanılır ve web
+    öğesinin konumunu belirtir.
+
+    SelectByIndex: Argüman olarak index numarası olarak bir tamsayı değeri alır, index 0 dan başlar.
+    SelectByValue: Argüman olarak String alır.
+    SelectByVisibleText: Argüman olarak String alır, açılır menü listesinden bir seçeneğin seçilmesini sağlar.
+    getOptions: Argüman olarak String alır, açılır menü listesinden bir seçeneğin seçilmesini sağlar.
+    getFirstSelectedOption(): Açılır menüden ilk seçilen seçeneği döndürür.
+    getAllSelectedOptions(): Açılır listenin tüm seçili seçeneklerini döndürür
+
+
+                 Synchronization & Selenium Waits
+    Herhangi bir eylemi gerçekleştirmek için iki veya daha fazla bileşen dahil olduğunda, bu bileşenlerin aynı
+    hızda birlikte çalışmasını bekleriz. Bu bileşenler arasındaki paralel olarak çalışacak koordinasyona
+    senkronizasyon denir.
+    Komut dosyası yürütme ve uygulama arasında senkronizasyon yapmak için uygun işlemleri yaptıktan sonra
+    beklememiz gerekiyor
+
+                      Alerts
+ /  Alertler; görüntüleyen ve belirli işlemler için izin isteyen bazı bilgileri kullanıcıya bildiren küçük açılır
+ /  kutular/pencerelerdir. Ek olarak, bunları uyarı amaçlı da kullanabiliriz. Bazen kullanıcı uyarı kutusuna birkaç
+ /  bilgi de girebilir. 3 cesit alert var simple(bılgı),promp(girdi bekler),confirmation(onaylama bekler evet hayır bekler)
+
+ /  Void accept(): 'OK' button of the alert box.(kabul etmek)
+ /  Void dismiss(): 'Cancel' button clicks in the alert box.(reddetmek)
+ /  String getText(): Message from the alert box .
+ /  Void sendKeys (String stringToSend): Ends data to the alert box
+
+                        iFrame
+      iFrame, bir HTML belgesinin içine gömülü bir HTML belgesidir.
+
+      iFrame’ler arasında geçiş yapmamız gerektiğini anlamalıyız. iFrame’ler arasında geçiş yapmak için driver’ın
+      switchTo().frame() komutunu kullanmalıyız.
+      switchTo().frame() 'i üç şekilde kullanabiliriz.
+      • switchTo.frame (int frame Number)
+      • switchTo.frame (string frame Name Or Id)
+      • switchTo.frame (WebElement frame Element
+
+      iFrame’den çıkmak için 2 komut vardır.
+      • driver.switchTo( ).parentFrame( );  1 üst seviyedeki frame çıkartır.
+      • driver.switchTo( ).defaultContent( );  En üstteki frame çıkmak için kullanılır.
+
+
+                  Test Base
+        TestBase Class: Her test class’ında tekrar tekrar
+        yazdığımız setup ve teardown metotları tekrar
+        yazmaktan kurtulmak için Java OOP konsepti kullanarak
+        oluşturduğumuz bir class’dır.
+        Test Base parent olarak kabul eden class’lar hazırlık için
+        oluşturduğumuz driver, setup() ve teardown()
+        oluşturmak zorunda kalmazlar, kendilerinde olmasa bile
+        parent class’dan kullanılmış olur.
+        TestBase genelde testlerden farklı bir package’da
+        olduğundan driver’ın kullanabilmesi için public veya
+        protected yapılması gerekir. Biz hep child class’lardan
+        kullanacağımız için protected yapmayı yapmayı tercih
+        ediyoruz.
+        TestBase, Test classlarını temiz tutmamıza yardımcı olur

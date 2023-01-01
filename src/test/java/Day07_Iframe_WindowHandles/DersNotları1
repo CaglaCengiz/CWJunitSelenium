@@ -1,0 +1,103 @@
+                                Window Handle
+Herhangi bir tarayıcıdaki bir window, kullanıcının bir bağlantıya/URL'ye tıkladıktan sonra geldiği ana web
+sayfasıdır.
+Bir kullanıcı bir URL'ye ulaştığında bir web sayfası açılır. Bu ana sayfa, ana penceredir (parent window),
+yani kullanıcının şu anda açtığı ve herhangi bir işlemi gerçekleştireceği ana penceredir.
+Bu, Selenium otomasyon komut dosyamız yürütüldüğünde açılacak olan web sayfasının aynısıdır.
+Ana pencerenizin içinde açılacak olan tüm pencereler alt pencere (child windows) olarak adlandırılır
+
+                 Window Handle Methodları
+  driver.getWindowHandle(); → Mevcut sayfanın window handle değerini alır.
+  driver.switchTo().window(switch); → Window handle değerini kullanarak pencereler arası geçiş yapar.
+  driver.switchTo().newWindow(WindowType.TAB); → Yeni TAB oluşturarak geçiş yapar.
+  driver.switchTo().newWindow(WindowType.WINDOW); → Yeni WINDOW oluşturarak geçiş yapar.
+  driver.getWindowHandles(); → Tüm sayfaların window handle değerini alır
+
+
+                   Multiple Tabs
+  • String mainwindow = driver.getWindowHandle(): Parent window değerini benzersiz bir dize türü tanımlayıcısında saklar.
+  • Set <String> s = driver.getWindowHandles(): Tüm child window’ları String data type’ta bir sete atar.
+  • Iterator <String> itr = s.iterator(): Burada tüm child window’lar yinelenir.
+  • if (!mainWindow.equalsIgnoreCase(ChildWindow)): Parent window ile child window karşılaştırılır.
+  • driver.switchTo().window (ChildWindow): Child window’a geçer ve title okur.
+
+                            Actions
+   click(): Geçerli konumu tıklamak için kullanılır.
+   doubleClick(): Fare konumuna çift tıklama gerçekleştirmek için kullanılır.
+   clickAndHold(): Fare tıklamasını serbest bırakmadan gerçekleştirmek için kullanılır.
+   contextClick(): Geçerli fare konumuna sağ fare tıklaması gerçekleştirmek için kullanılır.(sag klık)
+   moveToElement (WebElement target): Fare işaretçisini hedef konumun merkezine taşımak için kullanılır.
+   dragAndDrop(WebElement source, WebElement target): Öğeyi kaynaktan sürüklemek ve hedef konuma bırakmak için kullanılır.
+   dragAndDropBy(source, xOffset, yOffset): Geçerli konumu tıklayıp basılı tutmak için verilen ofset değeri ve
+   ardından fareyi bırakmak için kullanılır.
+   (X = Yatay Kaydır, Y= Dikey Kaydır)
+   release(): Geçerli konumdaki sol fare düğmesini serbest bırakmak için kullanılır(mausdaki bırakma işlemi)
+
+                   Keyboard Actions
+  sendKeys (): Metin kutusuna, text yazmak için kullanılır.
+  keyDown (): Bir tuşu basılı tutmak için kullanılır. Tuşlar Shift, Ctrl ve Alt anlamına gelir.(tusa basma işlemi)
+  keyUp (): keyDown() yönteminden sonra zaten basılmış olan bir tuşu serbest bırakmak için kullanılır yani hedefe
+  odaklandıktan sonra tuşu serbest bırakır.(basılan tusu bırakma işlemi)(klavyedeki bırakma işlemi)
+  Keyboard actions 2 parametre alır
+
+                  JS Executor
+
+   JavaScript Executor’a neden ihtiyacımız var?
+   Selenium Webdriver'da, bir web sayfasındaki işlemleri tanımlamak ve gerçekleştirmek için XPath, CSS vb. gibi
+   konum belirleyiciler kullanılır.
+   Bu konum belirleyicilerin çalışmaması durumunda JavaScriptExecutor'ı kullanabilirsiniz. Bir web öğesinde
+   istenen bir işlemi gerçekleştirmek için JavaScriptExecutor'ı kullanabilirsiniz.
+   Selenium, javaScriptExecutor'ı destekler. Ekstra bir eklentiye gerek yoktur. JavaScriptExecutor kullanmak için
+   komut dosyasında (org.openqa.selenium.JavascriptExecutor) içe aktarmanız yeterlidir.
+   JavaScript HTML kodlara direk erişip yönetebilen bir script dili olduğundan bize çok fazla kolaylık sağlayabilir.
+
+
+  JavascriptExecutor js = (JavascriptExecutor)driver;
+  JavascriptExecutor kullanmak için ilk adım olarak driver’ı JavascriptExecutor interface’sine cast etmektir.
+  Bu interface sayesinde sayfa kaydırma işlemi ve JavaScript komutları çalıştırılabilir
+  En yaygın kullanılan methodu, executescript() methodudur.
+
+  executeScript - ScrollBy () web sayfasını verilen piksel değeri kadar ileri gider.
+  executeScript("window.scrollBy(x-piksel,y-piksel)"); ya da js.executeScript("scroll(x,y);");
+  x-piksel x eksenindeki sayıdır, sayı pozitifse sola, sayı negatifse sağa hareket eder.
+  y-piksel y eksenindeki sayıdır, sayı pozitifse ise aşağı doğru,sayı negatif ise yukarı doğru hareket eder.
+  js.executeScript("window.scrollBy(0,1000)); → Dikey olarak 1000 piksel aşağı kaydırır.
+
+  executeScript - ScrollTo () web sayfasını verilen piksel değerine götürür.
+  js.executeScript("window.scrollTo(0, 0)");
+  js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+
+  scrollIntoView () web sayfasındaki bir öğenin görünürlüğüne göre kaydırır.
+  js.executeScript("arguments[0].scrollIntoView();",WebElement);
+
+                              Robot Class
+   Robot Sınıfı: Selenium komut dosyalarında, tarayıcı ve masaüstü açılır pencerelerini otomatikleştirmek için Robot
+   classını kullanırız .
+   Genellikle tarayıcılara/tarayıcılardan dosya yükleme/indirme işlemlerinde kullanılır. Fare ve klavye işlemlerini
+   gerçekleştirmek için Robot classını kullanıyoruz. Robot class otomasyon süreci ile kullanımı çok kolaydır. Java
+   otomasyon frameworkleri ile kolayca entegre edilebilir.
+   Selenium, pencere tabanlı açılır pencereleri (açılır pencereleri indir, açılır pencereleri yükle gibi) işlemek için destek
+   sağlamaz. Windows iletişim kutusuyla etkileşim, Selenium’da bir sınırlamadır. Bir web öğesi üzerinde herhangi bir
+   işlem gerçekleştirmek için öğe için bir konumlandırıcıya ihtiyacımız vardır. Ancak Windows açılır pencereleri, web
+   sayfasının bir parçası olmadıkları için herhangi bir konum belirleyiciye sahip değildir, bunlar yerel işletim sistemi açılır
+   pencereleridir. İşte bu tür açılır pencereleri işlemek için Robot Class kavramını kullanabiliriz
+
+
+                           Selenium Robot Class Methodları
+      • keyPress(): Belirli bir tuşa basar.
+      • keyRelease(): Belirli bir klavye tuşunu serbest bırakır.
+      • mousePress(): Girilen değere göre fare düğmesine basar.
+      • mousePress(1): Birincil tuşa basar.
+      • mousePress(2): İkincil tuşa basar.
+      • mouseRelease(): Fare düğmesini serbest bırakır.
+      • mouseMove(): Fare işaretçisini verilen ekran koordinatlarına taşır.
+      • mouseWheel(): Verilen değer negatif ise aşağı kaydırılır, pozitif değer çarkı yukarı kaydırılırsa fareyi kaydırı
+
+
+           Otomasyonda Robot Class Dezantajları
+      • Pop-up'lara izin verilmezse veya istemci bilgisayarda dosya indirme yetkisi verilmezse robot sınıfı başarısız
+      olabilir.
+      • Robot sınıfı Gerçek fare komutlarını yürüttüğü için paralel çalıştırmadan kaçınılmalıdır, bu nedenle bir
+      bilgisayarda iki fare olamaz.
+      • keyPress olayını kullandığınızda keyRelease olayını da kullanmalısınız. keyRelease'i kullanamıyorsanız,
+      basılı kalacak ve arka planda bellek tüketecektir. Bu en büyük dezavantajdır

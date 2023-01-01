@@ -1,0 +1,58 @@
+     LOCATOR nedir?
+Selenium ile test otomasyonu yapabılmek için kullanacağımız webElementleri nerede bulacagını
+driver`a soylememiz gerekir. Bir web uygulamasında kullanılan etkileşimli veye etkileşimsiz
+her bir şey webElementi`dir.
+
+     Manuel olarak yapacağımız her bir işlemi driver ile yapacağız bunun için de driver`ın nereye gideceğini
+tarif etmemiz gerekiyor.
+
+          Nasıl tarif edeceğiz ?
+ Tarif etmek için uygun locator ìnı bulup bir webElemente`e tanımlamamız gerekir.
+ bu webElement de bizim classın içindeki objemiz olacak ve bununla istediğimiz işlemi
+yapmamıza yardım edecek. findElement ve findElements methodları ile bunu yapıyoruz.
+
+KISACA Locator bir web sitesindeki herhangi bir webElementi driver `a tarif etme yöntemidir.
+ Bunun için webElementi HTML kodlarındaki özelliklerini kullanır.
+
+ Bır HTML ögesinde 3 temel unsur vardır.
+ 1.Tag
+ 2.Attribute
+ 3.Attribute value
+ <button id="voiceSearchButton" class="realbox-icon-button" title="Sese göre ara"></button>
+     |    |                        |                          |
+     tag   attribute               attribute                  attribute
+
+
+      *********locator unıque benzersiz olmalıdır*****
+
+      8 locator var
+     id,name,classname,tagname,linktext,partialLinkText,xPath,cssSelector
+
+   id:
+   WebElement aramaKutusu=driver.findElement(By.id("abcd"));
+
+   name:
+    WebElement aramaKutusu=driver.findElement(By.name("efgh"));
+
+    classname:
+     WebElement aramaKutusu=driver.findElement(By.classname("nav-input nav-progressive-attribute "));
+     //genelde aynı işlevi yapan bır grup web elementi için kullanılır ve unique olmaz
+
+     tagname:
+     //tag isimleri genelde aynı olduğundan unique olmaz
+
+     linktext:
+     //a tagı ile baslar <a
+     //link uzerindeki yazının tamamını kullanarak locate edilir
+       WebElement aramaKutusu=driver.findElement(By.linktext("adresses"));
+
+       partialLinkText
+         //link uzerindeki yazının tamamını değil bir kısmını kullanarak locate edilir
+                WebElement aramaKutusu=driver.findElement(By.partialLinktext("adresses"));
+
+   xpath:
+   //en gucludur unique dir
+   //input[@class='alert-content']
+
+   //cssSelector
+   xpath`e benzer ve tum webelementler için kullanılır farkı xpath de kullandıgımız // ve @ işareti kullanılmaz
